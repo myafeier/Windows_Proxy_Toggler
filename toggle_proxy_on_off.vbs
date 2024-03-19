@@ -52,8 +52,10 @@ End Sub
 'Subroutine to create or update a shortcut on the desktop
 Sub CreateOrUpdateDesktopShortcut(onOrOff)
     'create a shortcut
-    Dim shortcut, iconStr
-    Set shortcut = WSHShell.CreateShortcut("C:\Users\" + username + "\Desktop\Proxy On-Off.lnk")
+    Dim shortcut, iconStr, desktopPath
+    desktopPath = WSHShell.SpecialFolders("Desktop")
+    Set shortcut = WSHShell.CreateShortcut(desktopPath + "\Proxy On-Off.lnk")
+    
     'Set the target path (target file) to run when the shortcut is clicked
     shortcut.TargetPath = ProxySettings_path + "\" + VbsScript_filename
     'Set the working directory. This is necessary in case you ever make this shortcut call a batch
